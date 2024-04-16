@@ -1,0 +1,20 @@
+version: '3'
+services:
+
+  
+
+  redis:
+    image: sreejithag/redis_cluster
+    container_name: redis-cluster
+    ports:
+      - 6375:6375
+      - 6380:6380
+      - 6381:6381
+    volumes:
+      - redis-data:/data
+    environment:
+        - ALLOW_EMPTY_PASSWORD=yes
+    restart: unless-stopped
+  
+volumes:
+  redis-data:
