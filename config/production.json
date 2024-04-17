@@ -1,5 +1,5 @@
 {
     "port": 6379,
     "host": "localhost",
-    "prefix": "bull"	
+    "prefix": "bull"
 }

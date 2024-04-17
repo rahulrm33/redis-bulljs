@@ -18,21 +18,21 @@ const verifyToken = (req, res, next) => {
   if (!token || !token.accessToken) {
     return res.status(401).json({ message: 'Token is required' });
   }
+  console.log("##"+process.env.NODE_ENV+"###")
 
   try {
-    const decoded = jwt.verify(token.accessToken, 'HelloTeamED');
-    // console.log(decoded)
+    const decoded = jwt.verify(token.accessToken, config.get("secret"));
+    console.log(decoded);
     req.accessLevel = decoded.role; 
-    if (req.accessLevel === 'root' && req.originalUrl === '/') {
-      return res.redirect('/ui-readwrite');
-    }
-    if (req.accessLevel === 'developer' && req.originalUrl === '/') {
-      return res.redirect('/ui-readonly');
-    }
-    next();
-  } catch (err) {
-    
-    return res.redirect('http://localhost:3000');
+      if (req.accessLevel === 'root' && req.originalUrl === '/') {
+        return res.redirect('/ui-readwrite');
+      }
+      if (req.accessLevel === 'developer' && req.originalUrl === '/') {
+        return res.redirect('/ui-readonly');
+      }
+      next();
+  }catch (err) {  
+    return res.redirect(config.get("redirectURL"));
   }
 };
 
@@ -50,7 +50,9 @@ const run = async () => {
       prefix:config.get('prefix')
     });
   });
-
+  console.log("%%%");
+  console.log(config.get('queueNames'))
+  console.log("%%%");
   const serverAdapterReadOnly = new ExpressAdapter();
   const serverAdapterReadWrite = new ExpressAdapter();
 
