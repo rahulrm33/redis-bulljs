@@ -1,5 +1,5 @@
 {
-    "port": 6379,
+    "port": 4000,
     "host": "ss-redis-staging.x25zbq.0001.use1.cache.amazonaws.com",
     "prefix": "bull"
 }

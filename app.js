@@ -86,7 +86,7 @@ const run = async () => {
     next();
   }, serverAdapterReadWrite.getRouter());
 
-  const PORT_READONLY = 4000;
+  const PORT_READONLY = config.get('port');
 
   app.listen(PORT_READONLY, () => {
     console.log(`Read-only Bull Board UI running on port ${PORT_READONLY}...`);
